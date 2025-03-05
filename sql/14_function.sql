@@ -3,9 +3,14 @@
  * Use table category, film_category, and film.
  */
 
-CREATE OR REPLACE FUNCTION list_category(TEXT) RETURNS TABLE(title TEXT) AS
+CREATE OR REPLACE FUNCTION list_category(categ TEXT) RETURNS TABLE(title TEXT) AS
 $$
--- FIXME: implementation goes here
+    SELECT film.title
+    FROM category
+    JOIN film_category ON category.category_id=film_category.category_id
+    JOIN film on film_category.film_id=film.film_id
+    WHERE category. name = categ
+    ORDER BY film.title ASC;
 $$
 LANGUAGE SQL
 IMMUTABLE
